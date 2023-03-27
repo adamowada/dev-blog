@@ -20,7 +20,6 @@ Implementation:
 In Python, the Singleton pattern can be implemented using various techniques such as class decorators, metaclasses, or by overriding the __new__ method. Here's an example using the __new__ method:
 
 ```python
-Copy code
 class Singleton:
     _instance = None
 
