@@ -7,13 +7,14 @@ The Memento pattern addresses the need to restore an object to a previous state 
 The Memento pattern involves three participants: the Originator, the Caretaker, and the Memento. The Originator creates a Memento object, which stores its internal state. The Caretaker is responsible for managing the Memento and can request the Originator to save or restore its state using the Memento.
 
 4. Consequences: 
-Benefits:
-- Encapsulates the state-saving and restoration logic, ensuring the internal state of the Originator remains hidden.
-- Allows multiple checkpoints, making it possible to revert to different previous states.
 
-Drawbacks:
-- May consume more memory, as it requires storing multiple Memento objects for different states.
-- Increases complexity due to the additional classes and interactions.
+- Benefits:
+    - Encapsulates the state-saving and restoration logic, ensuring the internal state of the Originator remains hidden.
+    - Allows multiple checkpoints, making it possible to revert to different previous states.
+
+- Drawbacks:
+    - May consume more memory, as it requires storing multiple Memento objects for different states.
+    - Increases complexity due to the additional classes and interactions.
 
 5. Implementation:
 In Python, you can implement the Memento pattern using classes for the Originator, Memento, and Caretaker. You can use Python's built-in `__dict__` attribute to store and restore the object's state.
@@ -85,3 +86,5 @@ print(originator._state)  # Output: State1
 
 originator.restore_state(caretaker.get_memento(1))
 print(originator._state)  # Output: State2
+
+```
