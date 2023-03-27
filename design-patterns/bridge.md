@@ -84,12 +84,12 @@ def main():
     shapes = [
         CircleShape(1, 2, 3, DrawingAPI1()),
         CircleShape(5, 7, 11, DrawingAPI2())
-]
+    ]
 
-for shape in shapes:
-    shape.draw()
-    shape.resize_by_percentage(50)
-    shape.draw()
+    for shape in shapes:
+         shape.draw()
+         shape.resize_by_percentage(50)
+         shape.draw()
     
 if name == "main":
     main()
