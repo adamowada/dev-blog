@@ -1,0 +1,102 @@
+Pattern Name: Abstract Factory
+
+Problem: The Abstract Factory pattern addresses the problem of creating families of related objects without specifying the concrete classes they belong to. This pattern is useful when a system needs to be independent of how its products are created, composed, and represented.
+
+Solution: The Abstract Factory pattern introduces an interface (Abstract Factory) to create a family of related objects. Concrete factories implement this interface to create concrete objects belonging to a specific family. Clients interact with the Abstract Factory interface to create objects, making it possible to change the concrete factory without affecting the client code.
+
+Consequences:
+
+Benefits: Provides a high level of abstraction and separation between the client code and concrete product implementations. It allows easy swapping of product families by changing the concrete factory.
+Drawbacks: It can be difficult to extend the factory to create new families of products without modifying the Abstract Factory interface.
+Implementation: In Python, the Abstract Factory pattern can be implemented using abstract base classes or interfaces.
+
+Participants:
+
+AbstractFactory: An interface that declares methods for creating a family of related objects.
+ConcreteFactory: Implements the AbstractFactory interface to create concrete products of a specific family.
+AbstractProduct: An interface for a type of product.
+ConcreteProduct: Implements the AbstractProduct interface for a specific product family.
+Collaborations: Client code interacts with the AbstractFactory to create objects. The ConcreteFactory creates ConcreteProduct instances. The Client code only interacts with the AbstractProduct interfaces and is unaware of the specific product family.
+
+Real-world example: Consider a GUI toolkit that supports multiple themes. Each theme has its own set of UI components like buttons, menus, and scrollbars. The Abstract Factory pattern can be used to create the UI components for different themes without the client code being aware of the specific theme being used.
+
+Here's an example of the Abstract Factory pattern in Python:
+
+```python
+from abc import ABC, abstractmethod
+
+# AbstractFactory
+class GUIFactory(ABC):
+    @abstractmethod
+    def create_button(self):
+        pass
+
+    @abstractmethod
+    def create_menu(self):
+        pass
+
+# ConcreteFactory
+class LightThemeFactory(GUIFactory):
+    def create_button(self):
+        return LightThemeButton()
+
+    def create_menu(self):
+        return LightThemeMenu()
+
+# ConcreteFactory
+class DarkThemeFactory(GUIFactory):
+    def create_button(self):
+        return DarkThemeButton()
+
+    def create_menu(self):
+        return DarkThemeMenu()
+
+# AbstractProduct
+class Button(ABC):
+    @abstractmethod
+    def draw(self):
+        pass
+
+# AbstractProduct
+class Menu(ABC):
+    @abstractmethod
+    def draw(self):
+        pass
+
+# ConcreteProduct
+class LightThemeButton(Button):
+    def draw(self):
+        return "Drawing light theme button."
+
+# ConcreteProduct
+class LightThemeMenu(Menu):
+    def draw(self):
+        return "Drawing light theme menu."
+
+# ConcreteProduct
+class DarkThemeButton(Button):
+    def draw(self):
+        return "Drawing dark theme button."
+
+# ConcreteProduct
+class DarkThemeMenu(Menu):
+    def draw(self):
+        return "Drawing dark theme menu."
+
+def client_code(factory: GUIFactory):
+    button = factory.create_button()
+    menu = factory.create_menu()
+
+    print(button.draw())
+    print(menu.draw())
+
+if __name__ == "__main__":
+    light_theme_factory = LightThemeFactory()
+    dark_theme_factory = DarkThemeFactory()
+
+    client_code(light_theme_factory)
+    client_code(dark_theme_factory)
+
+```
+
+In this example, the client_code function demonstrates how the client interacts with the Abstract Factory (GUIFactory) to create and use objects without being aware of the specific theme (Light or Dark).
